@@ -264,6 +264,32 @@
   50% { box-shadow:0 0 0 6px rgba(34,197,94,0); opacity:.7; }
 }
 .project-grid .mac-card { grid-column: 2; }
+@media (max-width:760px) {
+  .section { padding-left:20px; padding-right:20px; }
+  h1 { font-size:clamp(40px,12vw,64px); }
+  .display-copy { font-size:44px; }
+  .about-layout h2, .contact-layout h2, .music-copy h2 { font-size:40px; }
+  .about-copy, .about-copy p + p { font-size:17px; }
+  .project-grid { grid-template-columns:1fr; }
+  .project-grid .project-placeholder.project-video { width:100%; max-width:300px; margin:0 auto 17px; }
+  .project-meta h3 { font-size:18px; }
+  .project-meta span:last-child { font-size:13px; }
+  .mac-window { width:100%; margin:0 auto 17px; }
+  .track-frame { height:120px; }
+  .filter-row { gap:18px; }
+  .filter-row button { font-size:14px; }
+  .section-label { font-size:12px; gap:16px; }
+  .section-label span:last-child { font-size:15px; }
+  .service-line { grid-template-columns:30px 1fr 18px; gap:8px; }
+  .service-line strong { font-size:18px; }
+  .service-note { font-size:14px; }
+  .experience-row { grid-template-columns:1fr; gap:6px; padding:18px 0; }
+  .experience-row h3 { font-size:20px; }
+  .experience-row p { font-size:15px; }
+  .hero-intro, .hero-aside, .music-copy p:last-child { font-size:15px; }
+  .contact-links { font-size:14px; }
+  .inquiry-form input, .inquiry-form textarea { font-size:16px; }
+}
 </style>
 </head>
 <body>
