@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Parikshit Mulik - Video editor, motion designer, music producer and sound designer based in Mumbai.">
+<title>Parikshit Mulik | Creative Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root { --black:#000; --white:#fff; --muted:#8c8c8c; --line:#292929; --pad:clamp(20px,4.5vw,72px); }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--black); color:var(--white); font-family:"Inter","Helvetica Neue",sans-serif; -webkit-font-smoothing:antialiased; }
+  a { color:inherit; text-decoration:none; }
+  button, input, textarea { font:inherit; }
+  button, a { -webkit-tap-highlight-color:transparent; }
+  em { font-style:normal; }
+  .site-shell { min-height:100vh; overflow:hidden; background:var(--black); }
+
+  /* Navigation */
+  .site-nav { height:76px; border-bottom:1px solid var(--line); display:flex; align-items:center; padding:0 var(--pad); position:relative; z-index:3; gap:35px; }
+  .wordmark { font:800 21px/1 "Arial Black",Impact,sans-serif; letter-spacing:-.02em; margin-right:auto; }
+  .nav-links { display:flex; gap:29px; font-size:11px; text-transform:uppercase; letter-spacing:.1em; }
+  .nav-links a, .text-link, .site-footer a { transition:opacity .25s ease; }
+  .nav-links a:hover, .text-link:hover, .site-footer a:hover { opacity:.55; }
+  .nav-index { color:var(--muted); font-size:10px; letter-spacing:.12em; margin-left:45px; text-transform:uppercase; }
+  .menu-button { display:none; color:#fff; background:none; border:0; padding:5px; cursor:pointer; }
+
+  /* Hero */
+  .hero { min-height:calc(100vh - 76px); padding:24px var(--pad) 38px; display:flex; flex-direction:column; border-bottom:1px solid var(--line); }
+  .hero-top, .hero-bottom, .section-head, .project-meta, .site-footer { display:flex; justify-content:space-between; align-items:center; }
+  .hero-top { color:var(--muted); text-transform:uppercase; font-size:9px; letter-spacing:.13em; }
+  .hero-main { margin:auto 0; position:relative; }
+  .eyebrow, .section-label, .section-count, .project-meta, .filter-row, .form-status, .contact-links { text-transform:uppercase; letter-spacing:.12em; }
+  .eyebrow { font-size:10px; font-weight:600; letter-spacing:.18em; margin:0 0 28px; color:var(--muted); }
+  h1, h2, h3, p { margin-top:0; }
+  h1 { font:800 clamp(49px,9.35vw,154px)/.84 "Arial Black",Impact,sans-serif; letter-spacing:-.085em; margin:0; max-width:1200px; }
+  h1 em, h2 em, .display-copy em { font-style:normal; -webkit-text-stroke:1px #fff; color:transparent; }
+  h1 span { display:block; padding-left:10.5vw; }
+  .hero-aside { position:absolute; right:2vw; bottom:4px; text-align:right; font-size:12px; line-height:1.45; letter-spacing:.01em; }
+  .location { color:var(--muted); margin-top:35px; text-transform:uppercase; font-size:9px; letter-spacing:.13em; }
+  .live-dot, .status-dot { width:7px; height:7px; background:#fff; border-radius:50%; display:inline-block; margin-left:6px; }
+  .hero-bottom { align-items:flex-end; gap:40px; }
+  .hero-intro { color:#aaa; max-width:250px; font-size:12px; line-height:1.45; margin:0; }
+  .hero-actions { display:flex; gap:9px; }
+
+  /* Buttons */
+  .button { display:inline-flex; align-items:center; justify-content:center; gap:22px; padding:15px 18px; border:1px solid #fff; text-transform:uppercase; letter-spacing:.12em; font-size:10px; font-weight:700; transition:background-color .25s ease,color .25s ease,transform .25s ease; cursor:pointer; }
+  .button:hover { transform:translateY(-2px); }
+  .button-light { background:#fff; color:#000; }
+  .button-light:hover { background:#000; color:#fff; }
+  .button-outline:hover { background:#fff; color:#000; }
+
+  /* Sections */
+  .section { padding:100px var(--pad) 110px; border-bottom:1px solid var(--line); }
+  .section-head { align-items:flex-start; border-bottom:1px solid var(--line); padding-bottom:17px; margin-bottom:35px; }
+  .section-label { display:flex; gap:38px; font:700 10px/1 "Arial Black",Impact,sans-serif; }
+  .section-label span:first-child { color:var(--muted); font:500 10px/1 Inter,sans-serif; }
+  .section-count { color:var(--muted); font-size:9px; text-transform:uppercase; letter-spacing:.12em; }
+
+  /* Work */
+  .filter-row { display:flex; gap:25px; margin-bottom:25px; overflow:auto; scrollbar-width:none; }
+  .filter-row button { border:0; color:#666; background:none; cursor:pointer; font-size:10px; padding:0 0 7px; white-space:nowrap; transition:color .2s ease; }
+  .filter-row button:hover, .filter-row .filter-active { color:#fff; border-bottom:1px solid #fff; }
+  .project-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
+  .project-card { background:#000; min-width:0; }
+  .project-placeholder { aspect-ratio:1.42/1; margin-bottom:17px; background:#111; display:flex; align-items:center; justify-content:center; position:relative; color:#555; text-align:center; font:700 10px/1.45 "Arial Black",Impact,sans-serif; letter-spacing:.1em; transition:background-color .35s ease,color .35s ease; }
+  .project-1 .project-placeholder { aspect-ratio:1/1.15; background:#171717; }
+  .project-2 .project-placeholder { aspect-ratio:1.4/1; background:#0d0d0d; }
+  .project-card:hover .project-placeholder { background:#262626; color:#fff; }
+  .placeholder-mark { position:absolute; right:16px; top:12px; font:300 20px Inter,sans-serif; color:#777; }
+  .project-meta { padding:0 16px 20px; align-items:flex-start; font-size:9px; color:#777; gap:12px; flex-wrap:wrap; }
+  .project-meta h3 { color:#fff; font:700 14px "Arial Black",Impact,sans-serif; width:100%; margin:3px 0; letter-spacing:-.04em; }
+
+  /* Services */
+  .services-layout, .about-layout, .music-block, .contact-layout { display:grid; grid-template-columns:1fr 1fr; gap:10vw; }
+  .display-copy { font:800 clamp(45px,7vw,105px)/.87 "Arial Black",Impact,sans-serif; letter-spacing:-.08em; }
+  .service-list { border-top:1px solid var(--line); }
+  .service-line { min-height:59px; border-bottom:1px solid var(--line); display:grid; grid-template-columns:40px 1fr 20px; align-items:center; gap:12px; padding:10px 0; }
+  .service-line > span { color:#666; font-size:10px; }
+  .service-text { display:flex; flex-direction:column; gap:4px; }
+  .service-line strong { font:700 15px "Arial Black",Impact,sans-serif; letter-spacing:-.04em; }
+  .service-note { font-size:12px; line-height:1.4; color:#777; font-style:normal; }
+  .service-line svg { color:#777; transition:transform .2s ease; }
+  .service-line:hover svg { transform:rotate(45deg); color:#fff; }
+
+  /* About */
+  .about-layout h2, .contact-layout h2 { font:800 clamp(43px,6.4vw,100px)/.88 "Arial Black",Impact,sans-serif; letter-spacing:-.085em; margin:0; }
+  .about-layout h2 em, .contact-layout h2 em { -webkit-text-stroke:1px #000; }
+  .about-copy { max-width:400px; align-self:end; font-size:15px; line-height:1.5; }
+  .about-copy p + p { color:#666; margin-top:32px; }
+
+  /* Music */
+  .music-block { align-items:end; }
+  .music-copy h2 { font:800 clamp(46px,7vw,100px)/.86 "Arial Black",Impact,sans-serif; letter-spacing:-.085em; margin-bottom:30px; }
+  .music-copy p:last-child { color:#888; max-width:265px; font-size:12px; line-height:1.45; }
+
+  /* Mac-style music and video windows */
+  .mac-card { background:#000; padding:0; }
+  .mac-window { background:#1c1c1e; border:1px solid #2c2c2e; border-radius:12px; overflow:hidden; margin:0 16px 17px; }
+  .music-block .mac-window { margin:0; }
+  .mac-titlebar { position:relative; display:flex; align-items:center; gap:8px; padding:10px 14px; background:#2c2c2e; }
+  .mac-title { position:absolute; left:50%; transform:translateX(-50%); font-size:11px; color:#a1a1aa; white-space:nowrap; }
+  .dot { width:11px; height:11px; border-radius:50%; display:inline-block; }
+  .dot-red { background:#ff5f57; }
+  .dot-yellow { background:#febc2e; }
+  .dot-green { background:#28c840; }
+  .mac-body { padding:14px; }
+  .track-frame { height:140px; border-radius:10px; overflow:hidden; }
+  .track-frame iframe { width:100%; height:100%; border:0; display:block; }
+  .segmented { display:flex; background:#2c2c2e; border-radius:8px; padding:3px; gap:2px; margin-top:12px; }
+  .segmented button { flex:1; background:transparent; border:0; color:#a1a1aa; padding:7px 4px; border-radius:6px; cursor:pointer; font-size:11px; }
+  .segmented button.on { background:#636366; color:#fff; }
+  .project-placeholder.project-video { display:block; padding:0; background:#000; }
+  .project-video iframe { width:100%; height:100%; border:0; display:block; }
+  .video-switch { display:flex; gap:6px; flex-wrap:wrap; padding:0 16px; margin:-5px 0 15px; }
+  .video-switch button { width:26px; height:26px; border-radius:50%; border:1px solid #333; background:transparent; color:#888; font-size:10px; cursor:pointer; }
+  .video-switch button.on { background:#fff; color:#000; border-color:#fff; }
+
+  /* Experience */
+  .experience-list { border-top:1px solid var(--line); }
+  .experience-row { display:grid; grid-template-columns:50px 1.1fr .7fr 1fr; gap:20px; align-items:center; min-height:91px; border-bottom:1px solid var(--line); }
+  .experience-number, .experience-row > span { color:#777; font-size:10px; text-transform:uppercase; }
+  .experience-row h3 { font:700 17px "Arial Black",Impact,sans-serif; letter-spacing:-.05em; margin:0; }
+  .experience-row p { color:#777; font-size:11px; line-height:1.4; margin:0; }
+
+  /* Contact */
+  .contact-links { display:grid; gap:10px; font-size:10px; font-weight:700; }
+  .contact-links a:hover { opacity:.55; }
+  .contact-note { color:#777; font-size:12px; margin:35px 0 27px; }
+  .inquiry-form { border:1px solid #000; padding:25px; display:grid; gap:18px; align-self:start; }
+  .form-status { font-size:9px; letter-spacing:.08em; color:#666; border-bottom:1px solid #d2d2d2; padding-bottom:17px; display:flex; align-items:center; gap:7px; }
+  .form-status .status-dot { background:#999; margin:0; }
+  .inquiry-form label { display:grid; gap:8px; font-size:10px; text-transform:uppercase; letter-spacing:.1em; }
+  .inquiry-form input, .inquiry-form textarea { border:0; border-bottom:1px solid #999; border-radius:0; padding:9px 0; outline:0; color:#000; resize:vertical; min-height:34px; background:#fff; }
+  .inquiry-form textarea { min-height:66px; }
+  .inquiry-form input::placeholder, .inquiry-form textarea::placeholder { color:#aaa; }
+
+  /* Footer */
+  .site-footer { padding:22px var(--pad); color:#777; text-transform:uppercase; font-size:9px; letter-spacing:.12em; gap:20px; }
+  .site-footer a { color:#fff; }
+
+  /* Section colours (matches Emergent: white About and Contact, dark Music) */
+  #about { background:#fff; color:#000; }
+  #about .section-head { border-color:#d0d0d0; }
+  #about .section-label span:first-child, #about .section-count { color:#666; }
+  #music { background:#0a0a0a; }
+  #contact { background:#fff; color:#000; }
+  #contact .section-head { border-color:#d0d0d0; }
+  #contact .section-label span:first-child { color:#666; }
+  #contact .button-light { border-color:#000; }
+
+  @media (max-width:760px) {
+    .site-nav { height:64px; }
+    .nav-index { display:none; }
+    .menu-button { display:block; }
+    .nav-links { display:none; position:absolute; top:64px; left:0; right:0; background:#000; border-bottom:1px solid var(--line); padding:25px var(--pad); flex-direction:column; gap:20px; }
+    .nav-links.nav-links-open { display:flex; }
+    .hero { min-height:calc(100svh - 64px); padding-top:18px; }
+    .hero-top span:last-child { display:none; }
+    h1 { font-size:clamp(42px,12vw,80px); }
+    h1 span { padding-left:0; }
+    .hero-aside { position:static; text-align:left; margin-top:32px; display:flex; gap:35px; align-items:end; }
+    .location { margin:0; }
+    .hero-bottom { display:block; }
+    .hero-intro { margin-bottom:25px; }
+    .hero-actions { width:100%; }
+    .button { flex:1; }
+    .section { padding-top:70px; padding-bottom:75px; }
+    .project-grid { grid-template-columns:1fr 1fr; }
+    .project-placeholder, .project-1 .project-placeholder, .project-2 .project-placeholder { aspect-ratio:1/1.1; }
+    .project-meta { display:block; }
+    .project-meta h3 { margin:10px 0; }
+    .services-layout, .about-layout, .music-block, .contact-layout { grid-template-columns:1fr; gap:45px; }
+    .display-copy { font-size:16vw; }
+    .about-layout h2, .contact-layout h2 { font-size:14vw; }
+    .about-copy { max-width:100%; }
+    .experience-row { grid-template-columns:28px 1fr; gap:8px 16px; padding:18px 0; }
+    .experience-row > span:not(.experience-number), .experience-row p { grid-column:2; }
+    .experience-row h3 { grid-column:2; grid-row:1; }
+    .site-footer { align-items:flex-start; flex-direction:column; gap:12px; }
+  }
+.project-card .project-placeholder.project-video { aspect-ratio: 9 / 16; position: relative; padding: 0; background: #000; }
+.project-card .project-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.vid-nav { position:absolute; top:50%; transform:translateY(-50%); z-index:2; width:36px; height:36px; border-radius:50%; border:1px solid #fff; background:rgba(0,0,0,.65); color:#fff; font-size:22px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center; padding:0; }
+.vid-prev { left:10px; }
+.vid-next { right:10px; }
+.vid-nav:hover { background:#fff; color:#000; }
+.vid-count { position:absolute; left:50%; bottom:10px; transform:translateX(-50%); z-index:2; background:rgba(0,0,0,.65); color:#fff; font-size:10px; letter-spacing:.1em; padding:4px 10px; border-radius:999px; pointer-events:none; }
+.project-grid .project-placeholder { aspect-ratio: 9 / 16; width: 100%; height: auto; margin-bottom: 17px; padding: 0; overflow: hidden; background: #000; position: relative; }
+.project-grid .project-placeholder iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
+.project-grid .project-card { min-width: 0; }
+.project-grid .project-placeholder.project-video { width: min(100%, 360px); aspect-ratio: 9 / 16; margin: 0 16px 17px; }
+.vid-prev { left: 8px; }
+.vid-next { right: 8px; }
+.project-grid .project-placeholder.project-video { margin: 0 auto 17px; }
+.project-grid .project-placeholder.project-video { width: 360px; max-width: calc(100% - 110px); margin: 0 auto 17px; overflow: visible; }
+.vid-prev { left: -40px; }
+.vid-next { right: -40px; }
+.vid-nav { top: 50%; }
+/* Larger small text */
+.hero-top { font-size:12px; }
+.location { font-size:11px; }
+.nav-links { font-size:13px; }
+.nav-index { font-size:12px; }
+.eyebrow { font-size:12px; }
+.section-label span:first-child, .section-label { font-size:12px; }
+.section-count { font-size:12px; }
+.filter-row button { font-size:12px; }
+.project-placeholder { font-size:12px; }
+.placeholder-mark { font-size:24px; }
+.project-meta { font-size:11px; }
+.project-meta span:first-child { font-size:12px; }
+.project-meta span:last-child { font-size:15px; }
+.project-meta h3 { font-size:17px; }
+.service-line > span { font-size:12px; }
+.service-note { font-size:14px; }
+.experience-number, .experience-row > span { font-size:12px; }
+.experience-row p { font-size:14px; }
+.contact-links { font-size:12px; }
+.form-status { font-size:11px; }
+.inquiry-form label { font-size:12px; }
+.button { font-size:12px; }
+.segmented button { font-size:13px; }
+.mac-title { font-size:13px; }
+.video-switch button { font-size:12px; }
+.vid-count { font-size:12px; }
+.site-footer { font-size:11px; }
+.hero-intro { font-size:14px; }
+.hero-aside { font-size:14px; }
+.music-copy p:last-child { font-size:14px; }
+.about-copy { font-size:17px; }
+.section-label span:last-child { font-size:18px; }
+.section-label span:first-child { font-size:16px; }
+.filter-row button { font-size:16px; }
+#services .section-count { font-size:15px; }
+.service-line > span { font-size:16px; }
+.service-line strong { font-size:22px; }
+.service-line svg { width:22px; height:22px; }
+.service-line { min-height:auto; cursor:pointer; }
+.service-note { display:block; font-size:16px; max-height:0; opacity:0; margin-top:0; overflow:hidden; transition:max-height .35s ease, opacity .3s ease, margin-top .35s ease; }
+.service-line:hover .service-note { max-height:80px; opacity:1; margin-top:6px; }
+.service-line:hover .service-note { max-height:0; opacity:0; margin-top:0; }
+.service-line:hover svg { transform:none; }
+.service-line.open .service-note { max-height:80px; opacity:1; margin-top:6px; }
+.service-line.open svg { transform:rotate(45deg); color:#fff; }
+.about-copy { font-size:20px; line-height:1.6; }
+.about-copy p + p { font-size:20px; }
+.music-copy p:last-child { font-size:20px; line-height:1.6; max-width:560px; color:#999; }
+.experience-row p { font-size:18px; line-height:1.5; }
+.experience-row > span { font-size:14px; }
+.experience-number { font-size:14px; }
+.experience-row h3 { font-size:24px; }
+.contact-links { font-size:16px; letter-spacing:.06em; }
+.contact-links a { font-size:16px; }
+.form-status { font-size:13px; }
+.inquiry-form label { font-size:14px; }
+.inquiry-form input, .inquiry-form textarea { font-size:16px; }
+.form-status .status-dot { background:#22c55e; animation:dotPulse 2s ease-in-out infinite; }
+@keyframes dotPulse {
+  0%, 100% { box-shadow:0 0 0 0 rgba(34,197,94,.6); opacity:1; }
+  50% { box-shadow:0 0 0 6px rgba(34,197,94,0); opacity:.7; }
+}
+.project-grid .mac-card { grid-column: 2; }
+</style>
+</head>
+<body>
+<main class="site-shell">
+
+  <nav class="site-nav" id="top">
+    <a class="wordmark" href="#top">PARIKSHIT MULIK</a>
+    <div class="nav-links" id="nav-links">
+      <a href="#work" data-close>Work</a>
+      <a href="#about" data-close>About</a>
+      <a href="#music" data-close>Music</a>
+      <a href="#contact" data-close>Contact</a>
+    </div>
+    <button class="menu-button" id="menu-button" aria-label="Toggle navigation">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <span class="nav-index">MUM / IN</span>
+  </nav>
+
+ <header class="hero">
+  <div class="hero-top"><span>Creative Freelancer</span><span>Available for select projects</span></div>
+  <div class="hero-main">
+    <p class="eyebrow">PARIKSHIT MULIK</p>
+    <h1>I CREATE<br><em>ACROSS</em> VISUALS,<br><span>MOTION &amp; SOUND.</span></h1>
+    <div class="hero-aside"><p>Different mediums.<br>One creative mind.</p><p class="location">Mumbai, India <span class="live-dot"></span></p></div>
+  </div>
+  <div class="hero-bottom">
+    <p class="hero-intro">A multidisciplinary creative working between edit timelines, sound waves and moving images.</p>
+    <div class="hero-actions">
+      <a class="button button-light" href="#work">View work &nearr;</a>
+      <a class="button button-outline" href="#contact">Get in touch &nearr;</a>
+    </div>
+  </div>
+</header>
+
+  <section class="section" id="work">
+    <div class="section-head">
+      <div class="section-label"><span>01</span><span>Selected work</span></div>
+      <span class="section-count" id="project-count"></span>
+    </div>
+    <div class="filter-row" id="filters"></div>
+    <div class="project-grid" id="project-grid"></div>
+  </section>
+
+  <section class="section" id="services">
+    <div class="section-head">
+      <div class="section-label"><span>02</span><span>What I do</span></div>
+      <span class="section-count">07 disciplines</span>
+    </div>
+    <div class="services-layout">
+      <p class="display-copy">Ideas in.<br><em>Possibilities</em> out.</p>
+      <div id="service-list"></div>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="section-head"><div class="section-label"><span>03</span><span>About</span></div></div>
+    <div class="about-layout">
+      <h2>MADE TO MOVE<br><em>BETWEEN</em> MEDIUMS.</h2>
+      <div class="about-copy">
+        <p>I'm Parikshit, a video editor, motion designer, music producer and sound designer based in Mumbai.</p>
+        <p>My practice moves across visuals, music and ideas. From shaping a story in the edit to building an independent music journey and creating entrepreneurial platforms, I like making things that have a point of view.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="music">
+  <div class="section-head">
+    <div class="section-label"><span>04</span><span>Music / sound</span></div>
+    <span class="section-count">Original work</span>
+  </div>
+  <div class="music-block">
+    <div class="music-copy">
+      <p class="eyebrow">THE OTHER SIDE OF THE TIMELINE</p>
+      <h2>LISTEN<br><em>IN PROGRESS.</em></h2>
+      <p>Original compositions, production snippets and future releases, collected here as they take shape.</p>
+    </div>
+    <div id="music-player"></div>
+  </div>
+</section>
+
+  <section class="section" id="experience">
+    <div class="section-head"><div class="section-label"><span>05</span><span>Experience</span></div></div>
+    <div id="experience-list"></div>
+  </section>
+
+  <section class="section" id="contact">
+    <div class="section-head"><div class="section-label"><span>06</span><span>Start a conversation</span></div></div>
+    <div class="contact-layout">
+      <div>
+        <h2>HAVE A GOOD<br><em>IDEA?</em> LET'S<br>MAKE IT MOVE.</h2>
+        <div class="contact-links"><a href="mailto:workwithparikshit@gmail.com">workwithparikshit@gmail.com</a><a href="https://www.instagram.com/parikshit___8727/" target="_blank" rel="noopener">INSTAGRAM / @parikshit___8727</a></div>
+      </div>
+      <form class="inquiry-form" action="https://formspree.io/f/mdeeprob" method="POST">
+        <input type="hidden" name="_subject" value="New enquiry from your portfolio">
+        <div class="form-status"><span class="status-dot"></span> SEND ME AN ENQUIRY</div>
+        <label>Your name<input type="text" name="name" placeholder="Name" required></label>
+        <label>Your email<input type="email" name="email" placeholder="Email" required></label>
+        <label>Tell me about it<textarea name="message" placeholder="A few words about the project" required></textarea></label>
+        <button class="button button-light" type="submit">Send enquiry &nearr;</button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <span>&copy; <span id="year"></span> PARIKSHIT MULIK</span>
+    <span>DIFFERENT MEDIUMS. ONE CREATIVE MIND.</span>
+    <a href="#top">Back to top &uarr;</a>
+  </footer>
+
+</main>
+<script>
+const projects = [
+  { name: "Skyjumper", type: "Video", number: "01", note: "Social media content for brand reels and short-form campaigns", links: [
+    "https://www.instagram.com/reel/C9o9e_8RrbA/?hl=en",
+    "https://www.instagram.com/reel/C9UuHCgScG4/?hl=en",
+    "https://www.instagram.com/reel/C8O2MHrIXO7/?hl=en",
+    "https://www.instagram.com/reel/C7owzALoovF/?hl=en",
+    "https://www.instagram.com/reel/C7LoPPhRmsc/?hl=en",
+    "https://www.instagram.com/reel/C9mAwNMxaK-/?hl=en"
+  ]},
+  { name: "Lotus Resort", type: "Video", number: "03", note: "Social media and UGC content for a resort brand", links: [
+    "https://www.instagram.com/reel/C9me4DaO0Ao/?hl=en",
+    "https://www.instagram.com/reel/C76Ob5ZSRfA/?hl=en",
+    "https://www.instagram.com/reel/C8YycQ5yhyP/?hl=en",
+    "https://www.instagram.com/reel/C8y51X-MtqK/?hl=en",
+    "https://www.instagram.com/reel/C86zAz_y-Jc/?hl=en",
+    "https://www.instagram.com/reel/C9wW5zvuZo4/?hl=en",
+    "https://www.instagram.com/reel/C-Ac2SpSkdY/?hl=en",
+    "https://www.instagram.com/reel/C74NW67SZKN/?hl=en"
+  ]},
+  { name: "Flipkart Play", type: "Video", number: "05", note: "UGC content for Flipkart Play section inside the Flipkart app", links: [
+    "https://drive.google.com/file/d/17u9FndEM_Srcow3KX7Z2r6vLShzK3WJs/view?usp=drive_link",
+    "https://drive.google.com/file/d/1JkTfS1RCUVk6y4gean0EFpLRj3KeYJTf/view?usp=drive_link",
+    "https://drive.google.com/file/d/11lC0npu4-J7Ccf05vnfFh8xSBMX2T0JJ/view?usp=drive_link"
+  ]},
+  { name: "Farmdidi", type: "Video", number: "02", note: "Social media content and Meta ads", links: [
+    "https://www.instagram.com/reel/C8Z_JGGSFoi/?hl=en",
+    "https://www.instagram.com/reel/C8KMc9oIoHO/?hl=en",
+    "https://www.instagram.com/reel/C8Gv38HBVXW/?hl=en",
+    "https://www.instagram.com/reel/C7YF7DCBr3O/?hl=en",
+    "https://www.instagram.com/reel/C7WPLcDy72P/?hl=en",
+    "https://www.instagram.com/reel/C7RVSAhsrta/?hl=en"
+  ]},
+  { name: "Motion Graphics", type: "Motion", number: "04", note: "Talking head video with a documentary-style edit, dynamic subtitles and on-screen text", links: [
+    "https://drive.google.com/file/d/1fsd8-qCdr7r5FwWAoF4_lzJAZyBqr45S/view?usp=drive_link"
+  ]},
+  { name: "Social Media Reels", type: "Video", number: "06", note: "Freelance and personal edits", links: [
+    "https://drive.google.com/file/d/1emS3b6ULLg47qh6C9zcT1TI0nbdMA6BA/view?usp=drive_link",
+    "https://drive.google.com/file/d/18AD9_f_PESzsA2TufI82TUOEmwlrW5T6/view?usp=drive_link",
+    "https://www.instagram.com/p/DXCvn44girp/?hl=en",
+    "https://www.instagram.com/p/DacifDJC-7m/?hl=en"
+  ]},
+  { name: "Originals", type: "Music", number: "07", note: "Production snippet", links: [
+    "https://drive.google.com/file/d/1WkKJsOwN1XExHRyu68AESgVzuaVaCc5x/view?usp=drive_link",
+    "https://drive.google.com/file/d/1z6NurhIgK06LtR1WQx9MM5_ipA2SKNsq/view?usp=drive_link",
+    "https://drive.google.com/file/d/1khIwfvSJXFCprMI8czX3JRunQkyh50SI/view?usp=drive_link",
+    "https://drive.google.com/file/d/1Z6jn8D7iH8L_G6fR1ahQuqBRM466dXiT/view?usp=drive_link"
+  ]}
+];
+const services = [
+  { name: "Video editing", note: "Cutting raw footage into stories that hold attention." },
+  { name: "Motion graphics", note: "Titles, animated graphics and effects that bring content to life." },
+  { name: "Music production", note: "Original compositions and beats, from first idea to finished track." },
+  { name: "Sound design", note: "Custom sounds and textures that make every scene feel real." },
+  { name: "Audio post-production", note: "Cleaning, mixing and mastering dialogue and music for final delivery." },
+  { name: "Podcast editing", note: "Clean, well-paced episodes with clear audio and tight cuts." },
+  { name: "Event media", note: "Recap films and highlight reels that capture the energy of the day." }
+];
+
+const experiences = [
+  ["Viral Fission", "Executive video editor", "Editing short-form and long-form videos from raw footage to final delivery, shaping the story and pacing for each brand."],
+  ["Quantastic Marketing", "Content creator and video editor intern", "Creating and editing video content for social media, including cuts, captions and motion elements."],
+  ["Freelance projects", "Independent practice", "Working across brands, artists and ideas, from video editing and motion graphics to music and sound."],
+  ["EXP.CO", "Co-Founder / creative entrepreneur", "An event service company with four verticals: Live, Crew, Media and Socials."]
+];
+
+const filters = ["All", "Video", "Motion", "Music"];
+let activeFilter = "All";
+
+function getEmbedUrl(link) {
+  if (!link) return "";
+  let m = link.match(/(?:youtube\.com\/(?:watch\?v=|shorts\/|embed\/)|youtu\.be\/)([\w-]{11})/);
+  if (m) return "https://www.youtube.com/embed/" + m[1];
+  m = link.match(/instagram\.com\/(reel|reels|p|tv)\/([\w-]+)/);
+  if (m) {
+    const kind = m[1] === "p" ? "p" : m[1] === "tv" ? "tv" : "reel";
+    return "https://www.instagram.com/" + kind + "/" + m[2] + "/embed";
+  }
+  m = link.match(/drive\.google\.com\/file\/d\/([\w-]+)/);
+  if (m) return "https://drive.google.com/file/d/" + m[1] + "/preview";
+  return "";
+}
+
+function renderFilters() {
+  const row = document.getElementById("filters");
+  row.innerHTML = "";
+  filters.forEach(filter => {
+    const btn = document.createElement("button");
+    btn.textContent = filter;
+    if (filter === activeFilter) btn.classList.add("filter-active");
+    btn.addEventListener("click", () => { activeFilter = filter; renderFilters(); renderProjects(); });
+    row.appendChild(btn);
+  });
+}
+
+function renderProjects() {
+  const grid = document.getElementById("project-grid");
+  const visible = activeFilter === "All" ? projects : projects.filter(p => p.type === activeFilter);
+  document.getElementById("project-count").textContent = String(visible.length).padStart(2, "0") + " projects";
+  grid.innerHTML = "";
+
+  visible.forEach((project, index) => {
+    const card = document.createElement("article");
+    card.className = "project-card project-" + (index % 3);
+    const embeds = (project.links || []).map(getEmbedUrl).filter(Boolean);
+    const meta = '<div class="project-meta"><span>' + project.number + " — " + project.type + "</span><h3>" + project.name + "</h3><span>" + project.note + "</span></div>";
+
+    if (project.type === "Music" && embeds.length) {
+      card.className = "project-card mac-card";
+      card.innerHTML =
+        '<div class="mac-window">' +
+          '<div class="mac-titlebar"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span><span class="mac-title">' + project.name + "</span></div>" +
+          '<div class="mac-body">' +
+            '<div class="track-frame"><iframe title="' + project.name + '" src="' + embeds[0] + '" allow="autoplay" allowfullscreen></iframe></div>' +
+            '<div class="segmented">' + embeds.map((_, i) =>
+              '<button type="button" data-i="' + i + '" class="' + (i === 0 ? "on" : "") + '">Track ' + (i + 1) + "</button>"
+            ).join("") + "</div>" +
+          "</div>" +
+        "</div>" + meta;
+      grid.appendChild(card);
+
+      const frame = card.querySelector("iframe");
+      const buttons = card.querySelectorAll(".segmented button");
+      buttons.forEach(btn => {
+        btn.addEventListener("click", () => {
+          frame.src = embeds[Number(btn.dataset.i)];
+          buttons.forEach(b => b.classList.remove("on"));
+          btn.classList.add("on");
+        });
+      });
+      return;
+    }
+
+    let media;
+    if (embeds.length) {
+      media = '<div class="project-placeholder project-video">' +
+        '<iframe title="' + project.name + '" src="' + embeds[0] + '" allow="autoplay; fullscreen" allowfullscreen scrolling="no"></iframe>' +
+        (embeds.length > 1
+          ? '<button type="button" class="vid-nav vid-prev" aria-label="Previous video">&#8249;</button>' +
+            '<button type="button" class="vid-nav vid-next" aria-label="Next video">&#8250;</button>' +
+            '<span class="vid-count">1 / ' + embeds.length + "</span>"
+          : "") +
+        "</div>";
+    } else {
+      media = '<div class="project-placeholder"><span>IMAGE / VIDEO<br>PLACEHOLDER</span><span class="placeholder-mark">+</span></div>';
+    }
+
+    card.innerHTML = media + meta;
+    grid.appendChild(card);
+
+    if (embeds.length > 1) {
+      const frame = card.querySelector("iframe");
+      const count = card.querySelector(".vid-count");
+      let current = 0;
+      const show = i => {
+        current = (i + embeds.length) % embeds.length;
+        frame.src = embeds[current];
+        count.textContent = (current + 1) + " / " + embeds.length;
+      };
+      card.querySelector(".vid-prev").addEventListener("click", () => show(current - 1));
+      card.querySelector(".vid-next").addEventListener("click", () => show(current + 1));
+    }
+  });
+}
+function renderServices() {
+  const list = document.getElementById("service-list");
+  services.forEach((service, index) => {
+    const line = document.createElement("div");
+    line.className = "service-line";
+    line.innerHTML =
+      "<span>0" + (index + 1) + "</span>" +
+      '<div class="service-text"><strong>' + service.name + '</strong><em class="service-note">' + service.note + "</em></div>" +
+      '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>';
+    line.addEventListener("click", () => {
+      const wasOpen = line.classList.contains("open");
+      list.querySelectorAll(".service-line.open").forEach(l => l.classList.remove("open"));
+      if (!wasOpen) line.classList.add("open");
+    });
+    list.appendChild(line);
+  });
+}
+
+function renderExperience() {
+  const list = document.getElementById("experience-list");
+  experiences.forEach(([name, role, detail], index) => {
+    const row = document.createElement("div");
+    row.className = "experience-row";
+    row.innerHTML = '<span class="experience-number">0' + (index + 1) + "</span><h3>" + name + "</h3><span>" + role + "</span><p>" + detail + "</p>";
+    list.appendChild(row);
+  });
+}
+function renderMusicSection() {
+  const box = document.getElementById("music-player");
+  const originals = projects.find(p => p.type === "Music");
+  const tracks = (originals ? originals.links : []).map(getEmbedUrl).filter(Boolean);
+  if (!tracks.length) return;
+
+  box.innerHTML =
+    '<div class="mac-card"><div class="mac-window">' +
+      '<div class="mac-titlebar"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span><span class="mac-title">Originals / 001</span></div>' +
+      '<div class="mac-body">' +
+        '<div class="track-frame"><iframe title="Originals" src="' + tracks[0] + '" allow="autoplay" allowfullscreen></iframe></div>' +
+        '<div class="segmented">' + tracks.map((_, i) =>
+          '<button type="button" data-i="' + i + '" class="' + (i === 0 ? "on" : "") + '">Track ' + (i + 1) + "</button>"
+        ).join("") + "</div>" +
+      "</div>" +
+    "</div></div>";
+
+  const frame = box.querySelector("iframe");
+  const buttons = box.querySelectorAll(".segmented button");
+  buttons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      frame.src = tracks[Number(btn.dataset.i)];
+      buttons.forEach(b => b.classList.remove("on"));
+      btn.classList.add("on");
+    });
+  });
+}
+
+renderMusicSection();
+document.getElementById("menu-button").addEventListener("click", () => {
+  document.getElementById("nav-links").classList.toggle("nav-links-open");
+});
+document.querySelectorAll("[data-close]").forEach(link => {
+  link.addEventListener("click", () => {
+    document.getElementById("nav-links").classList.remove("nav-links-open");
+  });
+});
+document.getElementById("year").textContent = new Date().getFullYear();
+
+renderFilters();
+renderProjects();
+renderServices();
+renderExperience();
+</script>
+</body>
+</html>
