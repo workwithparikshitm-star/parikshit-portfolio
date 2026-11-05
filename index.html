@@ -742,6 +742,16 @@ renderFilters();
 renderProjects();
 renderServices();
 renderExperience();
+let lastPlayingFrame = null;
+window.addEventListener("blur", () => {
+  const active = document.activeElement;
+  if (active && active.tagName === "IFRAME") {
+    if (lastPlayingFrame && lastPlayingFrame !== active) {
+      lastPlayingFrame.src = lastPlayingFrame.src;
+    }
+    lastPlayingFrame = active;
+  }
+});
 </script>
 </body>
 </html>
