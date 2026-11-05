@@ -372,6 +372,13 @@
   .hero-main { margin:28px 0 36px; }
   .hero-aside { margin-top:36px; gap:22px; }
 }
+.hero { position:relative; overflow:hidden; }
+.hero-photo { position:absolute; right:0; bottom:0; height:100%; width:auto; max-width:62%; object-fit:cover; filter:grayscale(100%); z-index:0; pointer-events:none; }
+.hero-top, .hero-main, .hero-bottom { position:relative; z-index:1; }
+@media (max-width:760px) {
+  .hero-photo { height:auto; width:88%; max-width:none; right:-8%; top:auto; bottom:0; }
+  .hero::after { content:""; position:absolute; inset:0; background:linear-gradient(to bottom, #000 0%, rgba(0,0,0,.55) 45%, rgba(0,0,0,.15) 100%); z-index:0; pointer-events:none; }
+}
 </style>
 </head>
 <body>
@@ -392,6 +399,7 @@
   </nav>
 
  <header class="hero">
+   <img class="hero-photo" src="hero.jpg" alt="Parikshit Mulik">
   <div class="hero-top"><span>Creative Freelancer</span><span>Available for select projects</span></div>
   <div class="hero-main">
     <p class="eyebrow">PARIKSHIT MULIK</p>
