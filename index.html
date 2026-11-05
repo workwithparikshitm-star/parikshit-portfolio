@@ -379,6 +379,11 @@
   .hero-photo { height:auto; width:88%; max-width:none; right:-8%; top:auto; bottom:0; }
   .hero::after { content:""; position:absolute; inset:0; background:linear-gradient(to bottom, #000 0%, rgba(0,0,0,.55) 45%, rgba(0,0,0,.15) 100%); z-index:0; pointer-events:none; }
 }
+@media (max-width:760px) {
+  .hero { overflow:hidden; }
+  .hero-photo { width:110%; max-width:none; height:auto; right:-20%; bottom:0; top:auto; }
+  .hero-bottom { position:relative; z-index:2; }
+}
 </style>
 </head>
 <body>
