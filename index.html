@@ -393,6 +393,9 @@
   .hero-actions { position:relative; z-index:2; }
   .hero-photo { width:92%; max-width:none; height:auto; right:-14%; bottom:0; top:auto; }
 }
+@media (max-width:760px) {
+  .hero-photo { width:150%; max-width:none; height:auto; right:-32%; bottom:14%; top:auto; filter:grayscale(100%) contrast(1.25) brightness(.9); -webkit-mask-image:linear-gradient(to right, transparent 0%, #000 35%), linear-gradient(to top, #000 70%, transparent 100%); -webkit-mask-composite:source-in; mask-image:linear-gradient(to right, transparent 0%, #000 35%), linear-gradient(to top, #000 70%, transparent 100%); mask-composite:intersect; }
+}
 </style>
 </head>
 <body>
