@@ -742,18 +742,6 @@ renderFilters();
 renderProjects();
 renderServices();
 renderExperience();
-let lastFrame = null;
-setInterval(() => {
-  const active = document.activeElement;
-  if (active && active.tagName === "IFRAME" && active !== lastFrame) {
-    if (lastFrame) {
-      const src = lastFrame.src;
-      lastFrame.src = "about:blank";
-      lastFrame.src = src;
-    }
-    lastFrame = active;
-  }
-}, 300);
 </script>
 </body>
 </html>
